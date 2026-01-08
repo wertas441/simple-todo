@@ -2,9 +2,9 @@
 
 import {useMemo, useState} from "react";
 import {TasksDataStructure} from "@/app/page";
-import TaskRow from "@/app/components/TaskRow";
-import LinkBtn from "@/app/components/LinkBtn";
-import MainInput from "@/app/components/MainInput";
+import TaskRow from "@/components/TaskRow";
+import LinkBtn from "@/components/LinkBtn";
+import MainInput from "@/components/MainInput";
 
 export const colorClass = 'border border-white';
 
