@@ -1,18 +1,29 @@
 import Link from "next/link";
-import {colorClass} from "@/app/Dashboard";
 
 interface IProps {
     label: string;
     href: string;
     className?: string;
+    variant?: 'default' | 'primary';
+    fullWidth?: boolean;
 }
 
-export default function LinkBtn({label, href, className = ''}: IProps) {
+export default function LinkBtn(
+    {
+        label,
+        href,
+        className = '',
+        variant = 'default',
+        fullWidth = true
+    }: IProps) {
+
+    const variantClass = variant === 'primary' ? 'btn btn-primary' : 'btn';
+    const widthClass = fullWidth ? 'w-full' : '';
 
     return (
         <Link
             href={href}
-            className={`${colorClass} rounded-lg w-full text-center text-white px-3 py-1.5 cursor-pointer ${className}`}
+            className={`${variantClass} ${widthClass} ${className}`}
         >
             {label}
         </Link>

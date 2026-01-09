@@ -1,1 +1,116 @@
 @import "tailwindcss";
+
+@layer base {
+    :root {
+        color-scheme: dark;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        @apply antialiased text-neutral-100;
+    }
+
+    ::selection {
+        @apply bg-indigo-500/30 text-white;
+    }
+}
+
+@layer components {
+    .app-bg {
+        @apply min-h-dvh w-full bg-neutral-900 ;
+    }
+
+    .app-shell {
+        @apply min-h-dvh w-full px-4 py-8 flex items-start sm:items-center justify-center;
+    }
+
+    .container {
+        @apply w-full max-w-2xl;
+    }
+
+    .panel {
+        @apply rounded-2xl bg-neutral-950/60 ring-1 ring-white/10 shadow-xl backdrop-blur p-5 sm:p-6;
+    }
+
+    .title {
+        @apply text-2xl sm:text-3xl font-semibold tracking-tight;
+    }
+
+    .muted {
+        @apply text-sm text-white/60;
+    }
+
+    .divider {
+        @apply my-5 h-px w-full bg-white/10;
+    }
+
+    .input {
+        @apply w-full rounded-xl bg-white/5 ring-1 ring-white/10 px-3 py-2 text-sm text-white placeholder:text-white/40 outline-none transition;
+    }
+
+    .input:focus {
+        @apply ring-2 ring-indigo-500/60;
+    }
+
+    .error {
+        @apply text-xs text-red-400;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium ring-1 ring-white/10 bg-white/5 text-white transition;
+    }
+
+    .btn:hover {
+        @apply bg-white/10;
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+    .btn-primary {
+        @apply bg-indigo-500/15 ring-indigo-400/30;
+    }
+
+    .btn-primary:hover {
+        @apply bg-indigo-500/25;
+    }
+
+    .icon-btn {
+        @apply inline-flex items-center justify-center rounded-xl p-2 ring-1 ring-white/10 bg-white/5 text-white transition;
+    }
+
+    .icon-btn:hover {
+        @apply bg-white/10;
+    }
+
+    .icon-btn:focus-visible {
+        @apply outline-none ring-2 ring-indigo-500/60;
+    }
+
+    .task-item {
+        @apply rounded-2xl bg-white/5 ring-1 ring-white/10 p-4 transition hover:bg-white/10;
+    }
+
+    .scroll-area {
+        @apply max-h-[55vh] overflow-auto pr-1;
+    }
+}
+
+.scroll-area::-webkit-scrollbar {
+    width: 10px;
+}
+.scroll-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+.scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
+}
+.scroll-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.22);
+}

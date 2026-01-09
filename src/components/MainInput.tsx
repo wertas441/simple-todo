@@ -1,4 +1,3 @@
-import {colorClass} from "@/app/Dashboard";
 import {memo} from "react";
 
 interface IProps {
@@ -13,18 +12,25 @@ interface IProps {
 
 function MainInput({ id, type = 'text', placeholder = '', className = '', value, onChange, error}: IProps) {
 
+    const describedBy = error ? `${id}-error` : undefined;
+    const inputStateClass = error ? 'ring-red-400/40 focus:ring-red-400/60' : '';
+
     return (
         <div className={`space-y-2`}>
             <input
                 id={id}
                 type={type}
                 placeholder={placeholder}
-                className={`${colorClass} rounded-lg w-full text-white placeholder-white px-3 py-1.5 ${className}`}
+                className={`input ${inputStateClass} ${className}`}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
+                aria-invalid={Boolean(error)}
+                aria-describedby={describedBy}
             />
 
-            <p className={`text-xs text-red-500 mb-2`}>{error}</p>
+            {error && (
+                <p id={describedBy} className="error">{error}</p>
+            )}
         </div>
     )
 }

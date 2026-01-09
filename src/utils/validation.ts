@@ -1,5 +1,4 @@
 
-
 export function validateTaskName(taskName: string) {
     if (taskName.trim().length === 0) {
         return 'Пожалуйста, введите название задачи'
