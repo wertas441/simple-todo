@@ -1,9 +1,9 @@
 'use client'
 
 import {useEffect, useMemo, useState} from "react";
-import {TasksDataStructure} from "@/app/page";
 import LinkBtn from "@/components/LinkBtn";
 import MainInput from "@/components/MainInput";
+import {TasksDataStructure} from "@/utils/types";
 
 export const colorClass = 'border border-white';
 
@@ -19,8 +19,8 @@ export default function Dashboard() {
         if (tasks){
             const jsonTask: TasksDataStructure[] = JSON.parse(tasks);
             setAllTasks(jsonTask);
+
             const activeTasks = jsonTask.filter((task) => !task.isComplete);
-            console.log(activeTasks);
             setActiveTasks(activeTasks);
         }
     }, [])
@@ -42,8 +42,9 @@ export default function Dashboard() {
 
         localStorage.setItem("tasks", JSON.stringify(updatedList));
         setAllTasks(updatedList);
-    }
 
+        setActiveTasks(updatedList.filter((task) => !task.isComplete));
+    }
 
     return (
         <div className={`${colorClass} bg-neutral-950 rounded-lg p-5`}>

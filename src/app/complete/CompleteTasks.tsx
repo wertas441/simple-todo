@@ -4,7 +4,7 @@ import MainInput from "@/components/MainInput";
 import LinkBtn from "@/components/LinkBtn";
 import {colorClass} from "@/app/Dashboard";
 import {useEffect, useMemo, useState} from "react";
-import {TasksDataStructure} from "@/app/page";
+import {TasksDataStructure} from "@/utils/types";
 
 export default function CompleteTasks() {
 

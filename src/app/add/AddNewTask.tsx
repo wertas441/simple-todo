@@ -2,15 +2,21 @@
 
 import MainInput from "@/components/MainInput";
 import {colorClass} from "@/app/Dashboard";
-import {useEffect, useState} from "react";
-import {TasksDataStructure} from "@/app/page";
+import {FormEvent, useEffect, useState} from "react";
+import {InputErrorState, TasksDataStructure} from "@/utils/types";
 import {useRouter} from "next/navigation";
+import {validateTaskDescription, validateTaskName} from "@/utils/validation";
 
 export default function AddNewTask() {
 
     const [taskName, setTaskName] = useState<string>("");
     const [taskDescription, setTaskDescription] = useState<string>("");
     const [tasksData, setTasksData] = useState<TasksDataStructure[]>([]);
+    const [inputError, setInputError] = useState<InputErrorState>({
+        nameError: null,
+        descriptionError: null,
+    });
+
     const router = useRouter();
 
     useEffect(() => {
@@ -19,11 +25,22 @@ export default function AddNewTask() {
         if (tasks){
             setTasksData(JSON.parse(tasks));
         }
-
     }, [])
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        const taskNameError = validateTaskName(taskName);
+        const taskDescriptionError = validateTaskDescription(taskDescription);
+
+        if (taskNameError || taskDescriptionError) {
+            setInputError({
+                nameError: taskNameError,
+                descriptionError: taskDescriptionError,
+            })
+
+            return
+        }
 
         const payload: TasksDataStructure = {
             id: tasksData.length + 1,
@@ -51,6 +68,7 @@ export default function AddNewTask() {
                     placeholder={`Введите название задачи...`}
                     value={taskName}
                     onChange={setTaskName}
+                    error={inputError.nameError}
                 />
 
                 <MainInput
@@ -58,6 +76,7 @@ export default function AddNewTask() {
                     placeholder={`Введите описание задачи...`}
                     value={taskDescription}
                     onChange={setTaskDescription}
+                    error={inputError.descriptionError}
                 />
 
                 <button

@@ -6,14 +6,6 @@ export const metadata: Metadata = {
     description: 'Список активных целей пользователя'
 }
 
-export interface TasksDataStructure {
-    id: number;
-    label: string;
-    description: string;
-    isComplete: boolean;
-    completeDate: string | null;
-}
-
 export default function Home() {
 
     return <Dashboard />
