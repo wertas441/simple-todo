@@ -1,4 +1,5 @@
 import {colorClass} from "@/app/Dashboard";
+import {memo} from "react";
 
 interface IProps {
     id: string;
@@ -10,7 +11,7 @@ interface IProps {
 
 }
 
-export default function MainInput({ id, type = 'text', placeholder = '', className = '', value, onChange }: IProps) {
+function MainInput({ id, type = 'text', placeholder = '', className = '', value, onChange }: IProps) {
 
     return (
         <input
@@ -23,3 +24,5 @@ export default function MainInput({ id, type = 'text', placeholder = '', classNa
         />
     )
 }
+
+export default memo(MainInput);

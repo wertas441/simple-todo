@@ -2,16 +2,41 @@
 
 import MainInput from "@/components/MainInput";
 import {colorClass} from "@/app/Dashboard";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {TasksDataStructure} from "@/app/page";
+import {useRouter} from "next/navigation";
 
 export default function AddNewTask() {
 
     const [taskName, setTaskName] = useState<string>("");
     const [taskDescription, setTaskDescription] = useState<string>("");
+    const [tasksData, setTasksData] = useState<TasksDataStructure[]>([]);
+    const router = useRouter();
+
+    useEffect(() => {
+        const tasks = localStorage.getItem("tasks");
+
+        if (tasks){
+            setTasksData(JSON.parse(tasks));
+        }
+
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const payload: TasksDataStructure = {
+            id: tasksData.length + 1,
+            label: taskName,
+            description: taskDescription,
+            isComplete: false,
+            completeDate: null,
+        }
+
+        const updatedTasks = [...tasksData, payload];
+
+        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+        router.push('/')
     }
 
     return (
