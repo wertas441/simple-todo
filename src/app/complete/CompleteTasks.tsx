@@ -1,30 +1,27 @@
 'use client'
 
+import MainInput from "@/components/MainInput";
+import LinkBtn from "@/components/LinkBtn";
+import {colorClass} from "@/app/Dashboard";
 import {useMemo, useState} from "react";
 import {TasksDataStructure} from "@/app/page";
-import ActiveTaskRow from "@/components/ActiveTaskRow";
-import LinkBtn from "@/components/LinkBtn";
-import MainInput from "@/components/MainInput";
+import CompleteTaskRow from "@/components/CompleteTaskRow";
 
-export const colorClass = 'border border-white';
-
-export default function Dashboard({tasks}: {tasks: TasksDataStructure[]}) {
+export default function CompleteTasks({completedTasks}: {completedTasks: TasksDataStructure[]}) {
 
     const [searchTask, setSearchTask] = useState<string>('');
 
     const searchList = useMemo(() => {
         const search = searchTask.toLowerCase().trim();
-        return tasks.filter(item => {
+        return completedTasks.filter(item => {
             return search.length === 0 || item.label.toLowerCase().includes(search)
         })
-    }, [searchTask, tasks])
-
-
+    }, [searchTask, completedTasks])
 
     return (
         <div className={`${colorClass} bg-neutral-950 rounded-lg p-5`}>
             <h1 className={`flex text-3xl justify-center items-center text-white`}>
-                Список активных задач
+                Список выполненных задач
             </h1>
 
             <div className={`mt-5`}>
@@ -38,8 +35,8 @@ export default function Dashboard({tasks}: {tasks: TasksDataStructure[]}) {
 
             <div className={`mt-5 gap-3 flex items-center justify-between`}>
                 <LinkBtn
-                    label={`Выполненные`}
-                    href={`/complete`}
+                    label={`Активные`}
+                    href={`/`}
                 />
 
                 <LinkBtn
@@ -51,7 +48,7 @@ export default function Dashboard({tasks}: {tasks: TasksDataStructure[]}) {
             <div className="mt-5">
                 {searchList.length > 0 ? (
                     searchList.map((task) => (
-                        <ActiveTaskRow
+                        <CompleteTaskRow
                             key={task.id}
                             task={task}
                         />

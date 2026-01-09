@@ -2,8 +2,8 @@ import {Metadata} from "next";
 import Dashboard from "@/app/Dashboard";
 
 export const metadata: Metadata = {
-    title: '',
-    description: ''
+    title: 'Список активных целей',
+    description: 'Главная страница отслеживания списка задач'
 }
 
 export interface TasksDataStructure {
@@ -35,7 +35,7 @@ export default function Home() {
             description: 'Task 3 description about the task',
             isComplete: false,
         },
-    ]
+    ];
 
     return <Dashboard tasks={tasks} />
 }

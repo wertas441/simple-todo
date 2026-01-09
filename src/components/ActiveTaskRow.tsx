@@ -1,7 +1,7 @@
 import {TasksDataStructure} from "@/app/page";
 
 
-export default function TaskRow({task}: {task: TasksDataStructure}){
+export default function ActiveTaskRow({task}: {task: TasksDataStructure}){
 
 
     return (

@@ -12,7 +12,7 @@ export default function LinkBtn({label, href, className = ''}: IProps) {
     return (
         <Link
             href={href}
-            className={`${colorClass} rounded-lg text-white px-3 py-1.5 cursor-pointer ${className}`}
+            className={`${colorClass} rounded-lg w-full text-center text-white px-3 py-1.5 cursor-pointer ${className}`}
         >
             {label}
         </Link>
